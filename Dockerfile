@@ -20,6 +20,7 @@ RUN apt-get update && apt-get --yes upgrade && apt-get --yes install \
 ADD datasets ${HOME}/datasets
 ADD patches ${HOME}/patches
 ADD scripts ${HOME}/scripts
+ADD xslt-templates ${HOME}/xslt-templates
 
 
 # Download XMLTK
