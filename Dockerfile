@@ -6,6 +6,7 @@ MAINTAINER Sven Gebauer <gebauers@fim.uni-passau.de>
 ENV DEBIAN_FRONTEND noninteractive
 ENV LANG="C.UTF-8"
 ENV LC_ALL="C.UTF-8"
+ENV HOME=/root
 
 RUN apt-get update && apt-get --yes upgrade && apt-get --yes install \
   bison \
@@ -13,12 +14,12 @@ RUN apt-get update && apt-get --yes upgrade && apt-get --yes install \
   flex \
   git \
   g++-9 \
-  make
+  make \
+  xml-twig-tools
 
-
-ENV HOME=/root
-WORKDIR ${HOME}
+ADD datasets ${HOME}/datasets
 ADD patches ${HOME}/patches
+ADD scripts ${HOME}/scripts
 
 
 # Download XMLTK
@@ -61,6 +62,10 @@ RUN git apply ${HOME}/patches/xalan-c/*
 RUN cd src && ./runConfigure -p linux -c gcc-9 -x g++-9 -P /usr/local/ && make
 RUN cp lib/* /usr/local/lib/ && cp bin/* /usr/local/bin/
 ENV LD_LIBRARY_PATH=/usr/local/lib
+
+
+# Download input dataset
+ADD https://dblp.org/xml/release/dblp-2023-01-03.xml.gz ${HOME}/datasets/dblp.xml.gz
 
 
 # Clean up in order to reduce the final image size
