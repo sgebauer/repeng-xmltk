@@ -73,3 +73,4 @@ ADD https://dblp.org/xml/release/dblp-2023-01-03.xml.gz ${HOME}/datasets/dblp.xm
 RUN apt-get clean
 
 WORKDIR ${HOME}
+CMD ${HOME}/scripts/doall.sh
