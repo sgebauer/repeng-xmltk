@@ -14,8 +14,15 @@ RUN apt-get update && apt-get --yes upgrade && apt-get --yes install \
   flex \
   git \
   g++-9 \
+  latexmk \
   make \
+  texlive-latex-extra \
+  texlive-latex-recommended \
   xml-twig-tools
+
+# texlive-fonts-extra is required by the ACM LaTeX template, but is very large.
+# --no-install-recommends at least saves us 150MB of unnecessary dependencies.
+RUN apt-get --yes install --no-install-recommends texlive-fonts-extra
 
 ADD datasets ${HOME}/datasets
 ADD patches ${HOME}/patches
@@ -67,6 +74,12 @@ ENV LD_LIBRARY_PATH=/usr/local/lib
 
 # Download input dataset
 ADD https://dblp.org/xml/release/dblp-2023-01-03.xml.gz ${HOME}/datasets/dblp.xml.gz
+
+# Download report source files
+WORKDIR ${HOME}
+RUN git clone https://github.com/sgebauer/repeng-xmltk-report.git report
+RUN cd report && git reset --hard feb4cada8c1059e5911235e21eb07f5d62352f66
+
 
 
 # Clean up in order to reduce the final image size

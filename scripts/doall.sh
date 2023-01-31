@@ -8,3 +8,6 @@ echo "Preparing datasets"
 
 echo "Running experiments"
 ./run-experiment.sh
+
+echo "Building report"
+./build-report.sh
