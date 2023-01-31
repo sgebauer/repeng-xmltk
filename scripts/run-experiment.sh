@@ -25,8 +25,8 @@ validate_and_measure() {
   set -e
 
   runtime="$(( (after - before) / 1000000 ))"
-  size="$(wc --bytes "$input_file")"
-  original_count="$(xml_grep --count '/dblp/*' "$input_file" | awk '/^total:/{ print $2 }')"
+  size="$(wc --bytes "$input_file" | awk '{ print $1 }')"
+  original_count="$(cat "${input_file}.count")"
   sorted_count="$(xml_grep --count '/dblp/*' "$BUFFER_FILE" | awk '/^total:/{ print $2 }')"
 
   if [ "$original_count" -eq "$sorted_count" ]; then

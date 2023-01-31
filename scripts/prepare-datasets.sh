@@ -24,6 +24,10 @@ prepare_file() {
     # Write the output to the target file and discard all errors (xml_grep will
     # always complain about its invalid input).
     sed 's/&[a-zA-Z]\+;/_/g' >"$file" 2>/dev/null || true
+
+    # Pre-compute the number of input elements for validation later, so that
+    # we don't have to do it in every experiment run.
+    xml_grep --count '/dblp/*' "$file" | awk '/^total:/{ print $2 }' >"${file}.count"
 }
 
 # These are the input sizes used in the original paper, rounded up to the
