@@ -1,0 +1,31 @@
+From 6a33ccc05cafbeb37b71e94abd8da88474d51f08 Mon Sep 17 00:00:00 2001
+From: Sven Gebauer <mail@sgebauer.net>
+Date: Wed, 18 Jan 2023 16:30:23 +0000
+Subject: [PATCH 4/6] Fix flex error on "yywrap"
+
+xsort uses an old way of disabling flex's "yywrap" method. This commit switches to the new "noyywrap" option.
+---
+ xsort/cmdline.l | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/xsort/cmdline.l b/xsort/cmdline.l
+index 52cb339..e2365d7 100644
+--- a/xsort/cmdline.l
++++ b/xsort/cmdline.l
+@@ -20,11 +20,11 @@ void usage();
+ 
+ #undef YY_INPUT
+ #define YY_INPUT(pszBuf, result, cchBuf) (result = myinput(pszBuf, cchBuf))
+-#undef mywrap
+-#define mywrap()    1
+ 
+ %}
+ 
++%option noyywrap
++
+ %s CONTEXT
+ %s ELEMENT
+ %s KEY
+-- 
+2.30.2
+

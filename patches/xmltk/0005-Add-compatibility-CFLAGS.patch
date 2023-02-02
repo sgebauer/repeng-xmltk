@@ -1,0 +1,31 @@
+From 3dfd3554a4da508c03a236ba6c387ba8aaf8f95a Mon Sep 17 00:00:00 2001
+From: Sven Gebauer <mail@sgebauer.net>
+Date: Wed, 18 Jan 2023 16:34:03 +0000
+Subject: [PATCH 5/6] Add compatibility CFLAGS
+
+This commit adds some compatibility arguments for the C compiler:
+- "-std=c++98" explicitly uses an older version of the C++ standard to avoid compatibility problems with modern C++.
+- "-fpermissive" disables some strict modern checks performed by the compiler, making them generate warnings instead
+  of hard errors.
+- "-Wno-write-strings" disables a check that otherwise results in a huge number of warnings due to xsort's outdated
+  use of strings.
+---
+ general.mk | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/general.mk b/general.mk
+index f8c2984..4dc11c3 100644
+--- a/general.mk
++++ b/general.mk
+@@ -12,7 +12,7 @@ BINDIR  = ${XMLTKROOT}/bin
+ # flags
+ #
+ 
+-CFLAGS	= -O -Wall -Wno-ctor-dtor-privacy -Wno-sign-compare -DXMLTK_PREDICATE $(MYCFLAGS)
++CFLAGS	= -O -Wall -Wno-ctor-dtor-privacy -Wno-sign-compare -DXMLTK_PREDICATE $(MYCFLAGS) -fpermissive -std=c++98 -Wno-write-strings
+ #CFLAGS	= -g -Wall -Wno-ctor-dtor-privacy -Wno-sign-compare -DXMLTK_PREDICATE $(MYCFLAGS)
+ LDFLAGS = ${LIBRARY_SEARCH_PATHS} ${LIBNAME} $(MYLDFLAGS)
+ #LDFLAGS = -g ${LIBRARY_SEARCH_PATHS} ${LIBNAME} $(MYLDFLAGS)
+-- 
+2.30.2
+

@@ -1,0 +1,23 @@
+From 8b7475bb3a904bcdd48bc41f65acca062cf9c05a Mon Sep 17 00:00:00 2001
+From: Sven Gebauer <mail@sgebauer.net>
+Date: Wed, 18 Jan 2023 16:29:05 +0000
+Subject: [PATCH 2/6] Add missing #include statement for <climits>
+
+Some parts of the code use functions from this header without including it first. This commit fixes that.
+---
+ xsort/xsort.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/xsort/xsort.cpp b/xsort/xsort.cpp
+index e316bcc..7c2aad8 100644
+--- a/xsort/xsort.cpp
++++ b/xsort/xsort.cpp
+@@ -1,4 +1,5 @@
+ #include "xmltk.h"
++#include <climits>
+ 
+ int g_cbMaxBuf = 32 * 1024 * 1024;     // default to 32 MB sorting window
+ int g_cMaxKeys = 0;
+-- 
+2.30.2
+

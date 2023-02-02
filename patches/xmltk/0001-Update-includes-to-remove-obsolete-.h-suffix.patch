@@ -1,0 +1,247 @@
+From e60a2c87f19da48eb80116c1ebbffb90090db6f1 Mon Sep 17 00:00:00 2001
+From: Sven Gebauer <mail@sgebauer.net>
+Date: Wed, 18 Jan 2023 16:28:18 +0000
+Subject: [PATCH 1/6] Update #includes to remove obsolete .h suffix
+
+In modern C++ versions, standard headers don't use a .h suffix (e.g. <iostream> instead of <iostream.h>).
+This commit updates #include statements to use these correct new names.
+---
+ include/Depth2offset.hpp | 2 +-
+ include/FileManager.h    | 2 +-
+ include/stl.h            | 2 +-
+ lib/file.hpp             | 2 +-
+ xpathDFA/Automata.h      | 4 ++--
+ xpathDFA/Error.h         | 2 +-
+ xpathDFA/Node.cxx        | 2 +-
+ xpathDFA/Node.h          | 2 +-
+ xpathDFA/Query.cxx       | 2 +-
+ xpathDFA/Query.h         | 2 +-
+ xpathDFA/Root.h          | 4 ++--
+ xpathDFA/Variable.cxx    | 2 +-
+ xpathDFA/Variable.h      | 8 ++++----
+ xpathDFA/XPath.cxx       | 2 +-
+ xpathDFA/XPath.h         | 2 +-
+ xpathDFA/Xmatch.hpp      | 2 +-
+ 16 files changed, 21 insertions(+), 21 deletions(-)
+
+diff --git a/include/Depth2offset.hpp b/include/Depth2offset.hpp
+index d2e462a..e4d5d1b 100644
+--- a/include/Depth2offset.hpp
++++ b/include/Depth2offset.hpp
+@@ -5,7 +5,7 @@
+ #define __DEPTH2OFFSET_H__
+ 
+ #include <stdio.h>
+-#include <iostream.h>
++#include <iostream>
+ #include <FileManager.h>
+ #include "SIndex.hpp"		// to read indexHeader and indexTable
+ 
+diff --git a/include/FileManager.h b/include/FileManager.h
+index 49f58d1..2736831 100644
+--- a/include/FileManager.h
++++ b/include/FileManager.h
+@@ -12,7 +12,7 @@
+ #include <stdlib.h>
+ #ifndef WIN32
+ #include <unistd.h>
+-#include <iostream.h>
++#include <iostream>
+ #else
+ #include <iostream>
+ #endif
+diff --git a/include/stl.h b/include/stl.h
+index 14c32cd..7b5e07f 100644
+--- a/include/stl.h
++++ b/include/stl.h
+@@ -9,7 +9,7 @@
+ #include <stack>
+ #include <queue>
+ #ifndef WIN32
+-#include <hash_map.h>
++#include <hash_map>
+ #else
+ #include <hash_map>
+ #endif
+diff --git a/lib/file.hpp b/lib/file.hpp
+index 9555201..2053acb 100644
+--- a/lib/file.hpp
++++ b/lib/file.hpp
+@@ -33,7 +33,7 @@ History:
+ #ifndef FILE_HPP
+ #define FILE_HPP
+ 
+-#include <iostream.h>
++#include <iostream>
+ #include <stdio.h>
+ #ifdef WIN32
+ #include <fcntl.h>
+diff --git a/xpathDFA/Automata.h b/xpathDFA/Automata.h
+index ed0025c..3524cbb 100644
+--- a/xpathDFA/Automata.h
++++ b/xpathDFA/Automata.h
+@@ -6,8 +6,8 @@
+ #if ! defined(__AUTOMATA_H__)
+ #define __AUTOMATA_H__
+ #ifndef WIN32
+-#include <hash_map.h>
+-#include <list.h>
++#include <hash_map>
++#include <list>
+ #else
+ #include <hash_map>
+ #include <list>
+diff --git a/xpathDFA/Error.h b/xpathDFA/Error.h
+index be2ea3f..ed15785 100644
+--- a/xpathDFA/Error.h
++++ b/xpathDFA/Error.h
+@@ -9,7 +9,7 @@
+ #define ERROR_STACK_SIZE  30
+ 
+ #ifndef WIN32
+-#include <iostream.h>
++#include <iostream>
+ #else
+ #include <iostream>
+ using namespace std;
+diff --git a/xpathDFA/Node.cxx b/xpathDFA/Node.cxx
+index cf98ce4..0782aec 100644
+--- a/xpathDFA/Node.cxx
++++ b/xpathDFA/Node.cxx
+@@ -5,7 +5,7 @@
+ #define NODE_EMBODY
+ #define XML_INDENT 2
+ #ifndef WIN32
+-#include <iostream.h>
++#include <iostream>
+ #else
+ #include <iostream>
+ #endif
+diff --git a/xpathDFA/Node.h b/xpathDFA/Node.h
+index 53ca09f..6d5e675 100644
+--- a/xpathDFA/Node.h
++++ b/xpathDFA/Node.h
+@@ -14,7 +14,7 @@ But it is not decided yet.
+ #define __NODE_H__
+ #include <stdlib.h>
+ #ifndef WIN32
+-#include <fstream.h>
++#include <fstream>
+ #else
+ #include <fstream>
+ #endif
+diff --git a/xpathDFA/Query.cxx b/xpathDFA/Query.cxx
+index 80a5021..80236b0 100644
+--- a/xpathDFA/Query.cxx
++++ b/xpathDFA/Query.cxx
+@@ -4,7 +4,7 @@
+ 
+ #define QUERY_EMBODY
+ #ifndef WIN32
+-#include <iostream.h>
++#include <iostream>
+ #else
+ #include <iostream>
+ #endif
+diff --git a/xpathDFA/Query.h b/xpathDFA/Query.h
+index 697c8b7..eb7fffc 100644
+--- a/xpathDFA/Query.h
++++ b/xpathDFA/Query.h
+@@ -23,7 +23,7 @@ in the Query::combineNFAs().
+ #define __QUERY_H__
+ #include <stdlib.h>
+ #ifndef WIN32
+-#include <fstream.h>
++#include <fstream>
+ #else
+ #include <fstream>
+ #endif
+diff --git a/xpathDFA/Root.h b/xpathDFA/Root.h
+index 5e15059..58cb401 100644
+--- a/xpathDFA/Root.h
++++ b/xpathDFA/Root.h
+@@ -16,8 +16,8 @@ that is inherited from Node object and it manages
+ #if ! defined(__Root_H__)
+ #define __Root_H__
+ #ifndef WIN32
+-#include <hash_map.h>
+-#include <fstream.h>
++#include <hash_map>
++#include <fstream>
+ #else
+ #include <hash_map>
+ #include <fstream>
+diff --git a/xpathDFA/Variable.cxx b/xpathDFA/Variable.cxx
+index d464c27..415be1c 100644
+--- a/xpathDFA/Variable.cxx
++++ b/xpathDFA/Variable.cxx
+@@ -4,7 +4,7 @@
+ 
+ #define VARIABLE_EMBODY
+ #ifndef WIN32
+-#include <iostream.h>
++#include <iostream>
+ #else
+ #include <iostream>
+ #endif
+diff --git a/xpathDFA/Variable.h b/xpathDFA/Variable.h
+index bc80943..53c616e 100644
+--- a/xpathDFA/Variable.h
++++ b/xpathDFA/Variable.h
+@@ -8,10 +8,10 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #ifndef WIN32
+-#include <fstream.h>
+-#include <set.h>
+-#include <list.h>
+-#include <hash_set.h>
++#include <fstream>
++#include <set>
++#include <list>
++#include <hash_set>
+ #else
+ #include <fstream>
+ #include <set>
+diff --git a/xpathDFA/XPath.cxx b/xpathDFA/XPath.cxx
+index b1f908b..020cc32 100644
+--- a/xpathDFA/XPath.cxx
++++ b/xpathDFA/XPath.cxx
+@@ -4,7 +4,7 @@
+ 
+ #define XPATH_EMBODY
+ #ifndef WIN32
+-#include <iostream.h>
++#include <iostream>
+ #else
+ #include <iostream>
+ #endif
+diff --git a/xpathDFA/XPath.h b/xpathDFA/XPath.h
+index 391baa7..b9e4e40 100644
+--- a/xpathDFA/XPath.h
++++ b/xpathDFA/XPath.h
+@@ -6,7 +6,7 @@
+ #define __XPATH_H__
+ #include <stdlib.h>
+ #ifndef WIN32
+-#include <fstream.h>
++#include <fstream>
+ #else
+ #include <fstream>
+ #endif
+diff --git a/xpathDFA/Xmatch.hpp b/xpathDFA/Xmatch.hpp
+index 2897b3b..3135c9f 100644
+--- a/xpathDFA/Xmatch.hpp
++++ b/xpathDFA/Xmatch.hpp
+@@ -80,7 +80,7 @@
+ //  Includes for all the program files to see
+ // ---------------------------------------------------------------------------
+ #include <string.h>
+-#include <iostream.h>
++#include <iostream>
+ #include <stdlib.h>
+ #include "XmatchHandlers.hpp"
+ #include "Query.h"
+-- 
+2.30.2
+

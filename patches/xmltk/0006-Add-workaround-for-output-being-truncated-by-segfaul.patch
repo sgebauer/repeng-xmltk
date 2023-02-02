@@ -1,0 +1,28 @@
+From b649691546f8c115670d34502b49e41b25748b35 Mon Sep 17 00:00:00 2001
+From: Sven Gebauer <mail@sgebauer.net>
+Date: Sat, 28 Jan 2023 16:18:50 +0000
+Subject: [PATCH 6/6] Add workaround for output being truncated by segfault
+ after exit
+
+Due to a bug in memory management, xsort will segfault at the end of the program, but still produce valid output.
+However, when xsort's output is buffered, this segfault may cause the output to be truncated before it is written out.
+As a workaround, this commit explititly flushes the standard output before the program exits, making sure that all
+output data is written before the segfault occurs.
+---
+ xsort/xsort.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/xsort/xsort.cpp b/xsort/xsort.cpp
+index 7c2aad8..b5a343e 100644
+--- a/xsort/xsort.cpp
++++ b/xsort/xsort.cpp
+@@ -927,5 +927,6 @@ int main(int argc, char* argv[])
+     }
+ 
+     CleanupGlobalTokenTable();
++    cout.flush();
+ }
+ 
+-- 
+2.30.2
+

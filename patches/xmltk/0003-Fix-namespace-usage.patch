@@ -1,0 +1,113 @@
+From 0fc6385bb735d52541014b6388c5ebde815c9c1b Mon Sep 17 00:00:00 2001
+From: Sven Gebauer <mail@sgebauer.net>
+Date: Wed, 18 Jan 2023 16:29:40 +0000
+Subject: [PATCH 3/6] Fix namespace usage
+
+Some parts of the code expect classes like "hash" or "hash_map" in the wrong namespace, or lack a
+"using namespace ...;" statement. This commit fixes those problems.
+---
+ include/stl.h       | 2 ++
+ lib/tokentable.cpp  | 2 +-
+ xpathDFA/Error.h    | 2 +-
+ xpathDFA/Root.h     | 5 ++++-
+ xpathDFA/Variable.h | 6 ++++--
+ 5 files changed, 12 insertions(+), 5 deletions(-)
+
+diff --git a/include/stl.h b/include/stl.h
+index 7b5e07f..655e159 100644
+--- a/include/stl.h
++++ b/include/stl.h
+@@ -15,6 +15,8 @@
+ #endif
+ 
+ using namespace std;
++using __gnu_cxx::hash_map;
++using __gnu_cxx::hash;
+ 
+ #endif  // _STL_H
+ 
+diff --git a/lib/tokentable.cpp b/lib/tokentable.cpp
+index b437938..04d2a93 100644
+--- a/lib/tokentable.cpp
++++ b/lib/tokentable.cpp
+@@ -25,7 +25,7 @@ struct tokeninfo_cmpeq
+ 
+ inline size_t myhashstr(char const *psz)
+ {
+-    return psz ? std::hash<char const *>()(psz) : 0;
++    return psz ? hash<char const *>()(psz) : 0;
+ }
+ 
+ struct tokeninfo_hash
+diff --git a/xpathDFA/Error.h b/xpathDFA/Error.h
+index ed15785..8a403fb 100644
+--- a/xpathDFA/Error.h
++++ b/xpathDFA/Error.h
+@@ -12,10 +12,10 @@
+ #include <iostream>
+ #else
+ #include <iostream>
+-using namespace std;
+ #endif
+ #include <stdlib.h>
+ #include "Base.h"
++using namespace std;
+ 
+ class ErrItem {
+  public:
+diff --git a/xpathDFA/Root.h b/xpathDFA/Root.h
+index 58cb401..b046943 100644
+--- a/xpathDFA/Root.h
++++ b/xpathDFA/Root.h
+@@ -25,6 +25,9 @@ that is inherited from Node object and it manages
+ #include "Variable.h"
+ #include "Node.h"
+ 
++using __gnu_cxx::hash_map;
++using __gnu_cxx::hash;
++
+ class Root;
+ 
+ class HashCharPtr
+@@ -32,7 +35,7 @@ class HashCharPtr
+ public: size_t
+ operator()(char const *str) const
+   { 
+-	return std::hash<char const *>()(str);
++	return hash<char const *>()(str);
+   }
+ };
+ class EqualCharPtr
+diff --git a/xpathDFA/Variable.h b/xpathDFA/Variable.h
+index 53c616e..5019b9e 100644
+--- a/xpathDFA/Variable.h
++++ b/xpathDFA/Variable.h
+@@ -12,13 +12,15 @@
+ #include <set>
+ #include <list>
+ #include <hash_set>
++using __gnu_cxx::hash_set;
++using __gnu_cxx::hash;
+ #else
+ #include <fstream>
+ #include <set>
+ #include <list>
+ #include <hash_set>
+-using namespace std;
+ #endif
++using namespace std;
+ 
+ class Variable;
+ 
+@@ -32,7 +34,7 @@ class HashPtr
+ public: size_t
+ operator()(void const * s) const
+   { 
+-	return std::hash<unsigned int>()((unsigned int)s);
++	return hash<unsigned int>()((unsigned int)s);
+   }
+ };
+ class EqualPtr
+-- 
+2.30.2
+
