@@ -56,3 +56,6 @@ for file in $DATASET_FILES; do
   validate_and_measure  local-sort xsort "$file"  xsort -c '/dblp/*' -e 'title' -e 'author' -e 'year' -e '*' "$file"
   validate_and_measure  local-sort xalan "$file"  Xalan "$file" "${TEMPLATES_DIR}/b-local-sort.xslt"
 done
+
+mkdir -p /output
+cp -r "${HOME}/results" /output/results

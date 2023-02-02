@@ -12,3 +12,6 @@ for file in ../results/*; do
 done
 
 latexmk -gg -pdf report.tex
+
+mkdir -p /output
+cp report.pdf /output/report.pdf
