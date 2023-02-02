@@ -1,3 +1,6 @@
+# Copyright 2023, Sven Gebauer <sven.gebauer@uni-passau.de>
+# SPDX-License-Identifier: Apache-2.0
+
 # Use a LTS base image. Debian releases typically have 5 years of long-term support.
 FROM debian:bullseye-slim
 
