@@ -1,0 +1,307 @@
+From f35e345279d03bfe0926a8fe9ae6bced4b1bda6a Mon Sep 17 00:00:00 2001
+From: Sven Gebauer <mail@sgebauer.net>
+Date: Fri, 6 Jan 2023 16:36:18 +0100
+Subject: [PATCH 1/2] Update #includes to remove obsolete .h suffix
+
+In modern C++ versions, standard headers don't use a .h suffix (e.g. <iostream> instead of <iostream.h>).
+This commit updates #include statements to use these correct new names.
+---
+ samples/CreateDOMDocument/CreateDOMDocument.cpp         | 2 +-
+ samples/DOMCount/DOMCount.hpp                           | 2 +-
+ samples/DOMPrint/DOMTreeErrorReporter.cpp               | 2 +-
+ samples/DOMPrint/DOMTreeErrorReporter.hpp               | 2 +-
+ samples/EnumVal/EnumVal.cpp                             | 2 +-
+ samples/IDOMCount/IDOMCount.hpp                         | 2 +-
+ samples/IDOMPrint/IDOMTreeErrorReporter.cpp             | 2 +-
+ samples/IDOMPrint/IDOMTreeErrorReporter.hpp             | 2 +-
+ samples/MemParse/MemParse.hpp                           | 2 +-
+ samples/PParse/PParse.hpp                               | 2 +-
+ samples/Redirect/Redirect.hpp                           | 2 +-
+ samples/SAX2Count/SAX2Count.hpp                         | 2 +-
+ samples/SAX2Print/SAX2Print.hpp                         | 2 +-
+ samples/SAXCount/SAXCount.hpp                           | 2 +-
+ samples/SAXPrint/SAXPrint.hpp                           | 2 +-
+ samples/SEnumVal/SEnumVal.cpp                           | 2 +-
+ samples/StdInParse/StdInParse.hpp                       | 2 +-
+ src/util/NetAccessors/Socket/UnixHTTPURLInputStream.cpp | 2 +-
+ tests/InitTermTest/InitTermTest.hpp                     | 2 +-
+ tests/ParserTest/ParserTest.hpp                         | 2 +-
+ tools/ICUData/ICUData.cpp                               | 2 +-
+ 21 files changed, 21 insertions(+), 21 deletions(-)
+
+diff --git a/samples/CreateDOMDocument/CreateDOMDocument.cpp b/samples/CreateDOMDocument/CreateDOMDocument.cpp
+index b8c0fc95e..e0fdd125e 100644
+--- a/samples/CreateDOMDocument/CreateDOMDocument.cpp
++++ b/samples/CreateDOMDocument/CreateDOMDocument.cpp
+@@ -96,7 +96,7 @@
+ #include <util/PlatformUtils.hpp>
+ #include <util/XMLString.hpp>
+ #include <dom/DOM.hpp>
+-#include <iostream.h>
++#include <iostream>
+ 
+ 
+ 
+diff --git a/samples/DOMCount/DOMCount.hpp b/samples/DOMCount/DOMCount.hpp
+index d05c8571a..a31918cb8 100644
+--- a/samples/DOMCount/DOMCount.hpp
++++ b/samples/DOMCount/DOMCount.hpp
+@@ -82,7 +82,7 @@
+ //  Includes
+ // ---------------------------------------------------------------------------
+ #include <sax/ErrorHandler.hpp>
+-#include <iostream.h>
++#include <iostream>
+ 
+ class SAXParseException;
+ 
+diff --git a/samples/DOMPrint/DOMTreeErrorReporter.cpp b/samples/DOMPrint/DOMTreeErrorReporter.cpp
+index df6d7ba35..03ea0590b 100644
+--- a/samples/DOMPrint/DOMTreeErrorReporter.cpp
++++ b/samples/DOMPrint/DOMTreeErrorReporter.cpp
+@@ -98,7 +98,7 @@
+ // ---------------------------------------------------------------------------
+ #include <sax/SAXParseException.hpp>
+ #include "DOMTreeErrorReporter.hpp"
+-#include <iostream.h>
++#include <iostream>
+ #include <stdlib.h>
+ #include <string.h>
+ #include <dom/DOMString.hpp>
+diff --git a/samples/DOMPrint/DOMTreeErrorReporter.hpp b/samples/DOMPrint/DOMTreeErrorReporter.hpp
+index 25a2e8c0f..61226bce6 100644
+--- a/samples/DOMPrint/DOMTreeErrorReporter.hpp
++++ b/samples/DOMPrint/DOMTreeErrorReporter.hpp
+@@ -87,7 +87,7 @@
+ 
+ #include <util/XercesDefs.hpp>
+ #include <sax/ErrorHandler.hpp>
+-#include <iostream.h>
++#include <iostream>
+ 
+ class DOMTreeErrorReporter : public ErrorHandler
+ {
+diff --git a/samples/EnumVal/EnumVal.cpp b/samples/EnumVal/EnumVal.cpp
+index 0075bb186..08f25d893 100644
+--- a/samples/EnumVal/EnumVal.cpp
++++ b/samples/EnumVal/EnumVal.cpp
+@@ -114,7 +114,7 @@
+ #include <framework/XMLValidator.hpp>
+ #include <parsers/SAXParser.hpp>
+ #include <validators/DTD/DTDValidator.hpp>
+-#include <iostream.h>
++#include <iostream>
+ #include <stdlib.h>
+ #include <string.h>
+ 
+diff --git a/samples/IDOMCount/IDOMCount.hpp b/samples/IDOMCount/IDOMCount.hpp
+index 09044fc31..8ef530bf8 100644
+--- a/samples/IDOMCount/IDOMCount.hpp
++++ b/samples/IDOMCount/IDOMCount.hpp
+@@ -62,7 +62,7 @@
+ //  Includes
+ // ---------------------------------------------------------------------------
+ #include <sax/ErrorHandler.hpp>
+-#include <iostream.h>
++#include <iostream>
+ 
+ class SAXParseException;
+ 
+diff --git a/samples/IDOMPrint/IDOMTreeErrorReporter.cpp b/samples/IDOMPrint/IDOMTreeErrorReporter.cpp
+index 4756553f1..38dae99a7 100644
+--- a/samples/IDOMPrint/IDOMTreeErrorReporter.cpp
++++ b/samples/IDOMPrint/IDOMTreeErrorReporter.cpp
+@@ -66,7 +66,7 @@
+ // ---------------------------------------------------------------------------
+ #include <sax/SAXParseException.hpp>
+ #include "IDOMTreeErrorReporter.hpp"
+-#include <iostream.h>
++#include <iostream>
+ #include <stdlib.h>
+ #include <string.h>
+ 
+diff --git a/samples/IDOMPrint/IDOMTreeErrorReporter.hpp b/samples/IDOMPrint/IDOMTreeErrorReporter.hpp
+index 2b177a9ec..e85564069 100644
+--- a/samples/IDOMPrint/IDOMTreeErrorReporter.hpp
++++ b/samples/IDOMPrint/IDOMTreeErrorReporter.hpp
+@@ -63,7 +63,7 @@
+ 
+ #include <util/XercesDefs.hpp>
+ #include <sax/ErrorHandler.hpp>
+-#include <iostream.h>
++#include <iostream>
+ 
+ 
+ 
+diff --git a/samples/MemParse/MemParse.hpp b/samples/MemParse/MemParse.hpp
+index 3eaafefe0..3a6d7ca78 100644
+--- a/samples/MemParse/MemParse.hpp
++++ b/samples/MemParse/MemParse.hpp
+@@ -81,7 +81,7 @@
+ // ---------------------------------------------------------------------------
+ #include <string.h>
+ #include <stdlib.h>
+-#include <iostream.h>
++#include <iostream>
+ #include <util/PlatformUtils.hpp>
+ #include "MemParseHandlers.hpp"
+ 
+diff --git a/samples/PParse/PParse.hpp b/samples/PParse/PParse.hpp
+index aef0e66e2..4e43271fa 100644
+--- a/samples/PParse/PParse.hpp
++++ b/samples/PParse/PParse.hpp
+@@ -78,7 +78,7 @@
+ // ---------------------------------------------------------------------------
+ //  Includes for all the program files to see
+ // ---------------------------------------------------------------------------
+-#include <iostream.h>
++#include <iostream>
+ #include <string.h>
+ #include <stdlib.h>
+ #include "PParseHandlers.hpp"
+diff --git a/samples/Redirect/Redirect.hpp b/samples/Redirect/Redirect.hpp
+index 7c2e77c2a..6fe5a4daa 100644
+--- a/samples/Redirect/Redirect.hpp
++++ b/samples/Redirect/Redirect.hpp
+@@ -81,7 +81,7 @@
+ // ---------------------------------------------------------------------------
+ #include <stdlib.h>
+ #include <string.h>
+-#include <iostream.h>
++#include <iostream>
+ #include <util/PlatformUtils.hpp>
+ #include "RedirectHandlers.hpp"
+ 
+diff --git a/samples/SAX2Count/SAX2Count.hpp b/samples/SAX2Count/SAX2Count.hpp
+index ad9b2ee66..57318956f 100644
+--- a/samples/SAX2Count/SAX2Count.hpp
++++ b/samples/SAX2Count/SAX2Count.hpp
+@@ -71,7 +71,7 @@
+ // ---------------------------------------------------------------------------
+ #include <stdlib.h>
+ #include <string.h>
+-#include <iostream.h>
++#include <iostream>
+ #include <util/PlatformUtils.hpp>
+ #include "SAX2CountHandlers.hpp"
+ #include <sax2/XMLReaderFactory.hpp>
+diff --git a/samples/SAX2Print/SAX2Print.hpp b/samples/SAX2Print/SAX2Print.hpp
+index fdb40d651..486d7c584 100644
+--- a/samples/SAX2Print/SAX2Print.hpp
++++ b/samples/SAX2Print/SAX2Print.hpp
+@@ -66,7 +66,7 @@
+ //  Includes for all the program files to see
+ // ---------------------------------------------------------------------------
+ #include <string.h>
+-#include <iostream.h>
++#include <iostream>
+ #include <stdlib.h>
+ #include "SAX2PrintHandlers.hpp"
+ 
+diff --git a/samples/SAXCount/SAXCount.hpp b/samples/SAXCount/SAXCount.hpp
+index 12ed33f7e..281c4e076 100644
+--- a/samples/SAXCount/SAXCount.hpp
++++ b/samples/SAXCount/SAXCount.hpp
+@@ -81,7 +81,7 @@
+ // ---------------------------------------------------------------------------
+ #include <stdlib.h>
+ #include <string.h>
+-#include <iostream.h>
++#include <iostream>
+ #include <util/PlatformUtils.hpp>
+ #include <parsers/SAXParser.hpp>
+ #include "SAXCountHandlers.hpp"
+diff --git a/samples/SAXPrint/SAXPrint.hpp b/samples/SAXPrint/SAXPrint.hpp
+index 9c74a9ea9..e35671e42 100644
+--- a/samples/SAXPrint/SAXPrint.hpp
++++ b/samples/SAXPrint/SAXPrint.hpp
+@@ -79,7 +79,7 @@
+ //  Includes for all the program files to see
+ // ---------------------------------------------------------------------------
+ #include <string.h>
+-#include <iostream.h>
++#include <iostream>
+ #include <stdlib.h>
+ #include "SAXPrintHandlers.hpp"
+ 
+diff --git a/samples/SEnumVal/SEnumVal.cpp b/samples/SEnumVal/SEnumVal.cpp
+index 37831357f..73659847b 100644
+--- a/samples/SEnumVal/SEnumVal.cpp
++++ b/samples/SEnumVal/SEnumVal.cpp
+@@ -78,7 +78,7 @@
+ #include <validators/schema/SchemaValidator.hpp>
+ #include <validators/common/ContentSpecNode.hpp>
+ #include <validators/schema/SchemaSymbols.hpp>
+-#include <iostream.h>
++#include <iostream>
+ #include <stdlib.h>
+ #include <string.h>
+ 
+diff --git a/samples/StdInParse/StdInParse.hpp b/samples/StdInParse/StdInParse.hpp
+index c317952ab..40caec7fe 100644
+--- a/samples/StdInParse/StdInParse.hpp
++++ b/samples/StdInParse/StdInParse.hpp
+@@ -84,7 +84,7 @@
+ // ---------------------------------------------------------------------------
+ #include <string.h>
+ #include <stdlib.h>
+-#include <iostream.h>
++#include <iostream>
+ #include <util/PlatformUtils.hpp>
+ #include "StdInParseHandlers.hpp"
+ 
+diff --git a/src/util/NetAccessors/Socket/UnixHTTPURLInputStream.cpp b/src/util/NetAccessors/Socket/UnixHTTPURLInputStream.cpp
+index 8a2fb180a..1227ef0e5 100644
+--- a/src/util/NetAccessors/Socket/UnixHTTPURLInputStream.cpp
++++ b/src/util/NetAccessors/Socket/UnixHTTPURLInputStream.cpp
+@@ -93,7 +93,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ 
+-#include <iostream.h>
++#include <iostream>
+ #include <unistd.h>
+ #include <sys/types.h>
+ #include <sys/socket.h>
+diff --git a/tests/InitTermTest/InitTermTest.hpp b/tests/InitTermTest/InitTermTest.hpp
+index ec5d38a62..3ba8317b6 100644
+--- a/tests/InitTermTest/InitTermTest.hpp
++++ b/tests/InitTermTest/InitTermTest.hpp
+@@ -62,7 +62,7 @@
+ //  Includes
+ // ---------------------------------------------------------------------------
+ #include <sax/ErrorHandler.hpp>
+-#include <iostream.h>
++#include <iostream>
+ 
+ class SAXParseException;
+ 
+diff --git a/tests/ParserTest/ParserTest.hpp b/tests/ParserTest/ParserTest.hpp
+index 1c7b96810..40d3cd275 100644
+--- a/tests/ParserTest/ParserTest.hpp
++++ b/tests/ParserTest/ParserTest.hpp
+@@ -98,7 +98,7 @@ enum OutputTypes
+ // ---------------------------------------------------------------------------
+ #include "ParserTest_Parser.hpp"
+ #include <stdlib.h>
+-#include <iostream.h>
++#include <iostream>
+ 
+ 
+ // ---------------------------------------------------------------------------
+diff --git a/tools/ICUData/ICUData.cpp b/tools/ICUData/ICUData.cpp
+index ba3af8b97..81b2e81a1 100644
+--- a/tools/ICUData/ICUData.cpp
++++ b/tools/ICUData/ICUData.cpp
+@@ -83,7 +83,7 @@
+ #include    <ctype.h>
+ #include    <stdio.h>
+ #include    <stdlib.h>
+-#include    <iostream.h>
++#include    <iostream>
+ #include    <string.h>
+ 
+ 
+-- 
+2.30.2
+

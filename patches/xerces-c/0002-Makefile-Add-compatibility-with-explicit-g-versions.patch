@@ -1,0 +1,28 @@
+From f1168731c8557134a97c22221832350d413dfe41 Mon Sep 17 00:00:00 2001
+From: Sven Gebauer <mail@sgebauer.net>
+Date: Fri, 6 Jan 2023 16:36:41 +0100
+Subject: [PATCH 2/2] Makefile: Add compatibility with explicit g++ versions
+
+The build system attempts to auto-detect which compiler is being used. This fails if an explicit version of g++ is used (e.g. g++-9 instead of g++).
+This patch adds a special case to fix this for the compiler version we are using.
+---
+ src/util/Compilers/Makefile.in | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/src/util/Compilers/Makefile.in b/src/util/Compilers/Makefile.in
+index 3610be1f6..87870242d 100644
+--- a/src/util/Compilers/Makefile.in
++++ b/src/util/Compilers/Makefile.in
+@@ -116,6 +116,9 @@ endif
+ ifeq (${CXX},g++)
+     CPP_OBJECTS = GCCDefs.$(TO)
+ endif
++ifeq (${CXX},g++-9)
++    CPP_OBJECTS = GCCDefs.$(TO)
++endif
+ ifeq (${CXX},aCC)
+     CPP_OBJECTS = HPCCDefs.$(TO)
+ endif
+-- 
+2.30.2
+

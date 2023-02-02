@@ -33,6 +33,36 @@ WORKDIR ${XMLTKROOT}
 RUN git apply ${HOME}/patches/xmltk/*
 RUN make SUBDIR='lib xpathDFA xsort' CC='gcc-9' CPP='g++-9' CXX='g++-9' BINDIR='/usr/local/bin' install
 
+
+# Download Xerces-c
+WORKDIR ${HOME}
+RUN git clone -b v1.6.0 https://github.com/apache/xerces-c.git xerces-c
+# Explicitly checkout the commit-ID in case the tag has changed
+# (Git clone -b only takes tags or branches, not commit-IDs)
+RUN cd xerces-c && git reset --hard 272307b4d632b24c611d31c314fda8eb33471222
+
+# Patch and build Xerces-c
+ENV XERCESCROOT=${HOME}/xerces-c
+WORKDIR ${XERCESCROOT}
+RUN git apply ${HOME}/patches/xerces-c/*
+RUN cd src && ./runConfigure -p linux -c gcc-9 -x g++-9 -P /usr/local/ && make && make install
+
+
+# Download Xalan-c
+WORKDIR ${HOME}
+RUN git clone -b Xalan-C_1_3 https://github.com/apache/xalan-c.git xalan-c
+# Explicitly checkout the commit-ID in case the tag has changed
+RUN cd xalan-c && git reset --hard 238cdd552ef97c748a6a35bed11287ba0fe10d29
+
+# Patch and build Xalan-c
+ENV XALANCROOT=${HOME}/xalan-c
+WORKDIR ${XALANCROOT}
+RUN git apply ${HOME}/patches/xalan-c/*
+RUN cd src && ./runConfigure -p linux -c gcc-9 -x g++-9 -P /usr/local/ && make
+RUN cp lib/* /usr/local/lib/ && cp bin/* /usr/local/bin/
+ENV LD_LIBRARY_PATH=/usr/local/lib
+
+
 # Clean up in order to reduce the final image size
 RUN apt-get clean
 

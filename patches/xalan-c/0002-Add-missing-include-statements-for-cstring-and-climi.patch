@@ -1,0 +1,52 @@
+From 49d20afe81fdce2f0c227fdd56c34216205aa1a1 Mon Sep 17 00:00:00 2001
+From: Sven Gebauer <mail@sgebauer.net>
+Date: Fri, 6 Jan 2023 16:42:43 +0100
+Subject: [PATCH 2/3] Add missing #include statements for <cstring> and
+ <climit>
+
+Some parts of the code use functions from these headers without including them first. This commit fixes that.
+---
+ src/PlatformSupport/DOMStringHelper.hpp           | 1 +
+ src/XalanDOM/XalanDOMString.cpp                   | 1 +
+ src/XercesParserLiaison/XercesBridgeNavigator.cpp | 1 +
+ 3 files changed, 3 insertions(+)
+
+diff --git a/src/PlatformSupport/DOMStringHelper.hpp b/src/PlatformSupport/DOMStringHelper.hpp
+index aa746fe11..2892d1ce1 100644
+--- a/src/PlatformSupport/DOMStringHelper.hpp
++++ b/src/PlatformSupport/DOMStringHelper.hpp
+@@ -81,6 +81,7 @@ class ostream;
+ 
+ #include <PlatformSupport/XalanUnicode.hpp>
+ #include <PlatformSupport/XalanXMLChar.hpp>
++#include <cstring>
+ 
+ 
+ 
+diff --git a/src/XalanDOM/XalanDOMString.cpp b/src/XalanDOM/XalanDOMString.cpp
+index bde6ce9c4..b7671faec 100644
+--- a/src/XalanDOM/XalanDOMString.cpp
++++ b/src/XalanDOM/XalanDOMString.cpp
+@@ -68,6 +68,7 @@
+ 
+ 
+ #include <cstdlib>
++#include <cstring>
+ 
+ 
+ 
+diff --git a/src/XercesParserLiaison/XercesBridgeNavigator.cpp b/src/XercesParserLiaison/XercesBridgeNavigator.cpp
+index 2db47b945..4685d9479 100644
+--- a/src/XercesParserLiaison/XercesBridgeNavigator.cpp
++++ b/src/XercesParserLiaison/XercesBridgeNavigator.cpp
+@@ -66,6 +66,7 @@
+ #include "XercesDocumentBridge.hpp"
+ #include "XercesTextBridge.hpp"
+ #include "XercesDOMException.hpp"
++#include <climits>
+ 
+ 
+ 
+-- 
+2.30.2
+

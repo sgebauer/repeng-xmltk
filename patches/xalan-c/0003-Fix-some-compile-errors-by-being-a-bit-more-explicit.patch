@@ -1,0 +1,68 @@
+From 572394a7bbc3216a40035a3eea935a7b270f98d4 Mon Sep 17 00:00:00 2001
+From: Sven Gebauer <mail@sgebauer.net>
+Date: Fri, 6 Jan 2023 16:43:14 +0100
+Subject: [PATCH 3/3] Fix some compile errors by being a bit more explicit
+
+Some lines in the code cause compile errors because they are too implicit in terms of types and namespaces.
+Fortunately, GCC also provided suggestions for all of them. This commit applies these suggestions.
+---
+ src/Include/XalanArrayKeyMap.hpp           | 2 +-
+ src/PlatformSupport/ReusableArenaBlock.hpp | 8 ++++----
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/src/Include/XalanArrayKeyMap.hpp b/src/Include/XalanArrayKeyMap.hpp
+index fc9ba7c31..4a4f81608 100644
+--- a/src/Include/XalanArrayKeyMap.hpp
++++ b/src/Include/XalanArrayKeyMap.hpp
+@@ -222,7 +222,7 @@ public:
+ 	insert_pair_type
+ 	insert(const value_type&	thePair)
+ 	{
+-		m_keyData.push_back(VectorHolderType::value_type(thePair.first, thePair.first + (length(thePair.first) + 1)));
++		m_keyData.push_back(typename VectorHolderType::value_type(thePair.first, thePair.first + (length(thePair.first) + 1)));
+ 
+ 		return m_map.insert(value_type(&*m_keyData.back().begin(), thePair.second));
+ 	}
+diff --git a/src/PlatformSupport/ReusableArenaBlock.hpp b/src/PlatformSupport/ReusableArenaBlock.hpp
+index a23241ddc..460e040f6 100644
+--- a/src/PlatformSupport/ReusableArenaBlock.hpp
++++ b/src/PlatformSupport/ReusableArenaBlock.hpp
+@@ -185,7 +185,7 @@ public:
+ 	{
+ 		assert(ownsObject(theObject) == true);
+ 
+-		m_destroyFunction(*theObject);
++		ArenaBlock<ObjectType>::m_destroyFunction(*theObject);
+ 
+ 		addToFreeList(theObject);
+ 	}
+@@ -237,7 +237,7 @@ private:
+ 		else
+ 		{
+ 			const size_type		theOffset =
+-					getBlockOffset(theObject);
++					ArenaBlock<ObjectType>::getBlockOffset(theObject);
+ 
+ 			return m_freeList.isSet(theOffset);
+ 		}
+@@ -254,7 +254,7 @@ private:
+ 	addToFreeList(const ObjectType*		theObject)
+ 	{
+ 		const size_type		theOffset =
+-				getBlockOffset(theObject);
++				ArenaBlock<ObjectType>::getBlockOffset(theObject);
+ 
+ 		m_freeList.set(theOffset);
+ 
+@@ -272,7 +272,7 @@ private:
+ 	removeFromFreeList(const ObjectType*	theObject)
+ 	{
+ 		const size_type		theOffset =
+-				getBlockOffset(theObject);
++				ArenaBlock<ObjectType>::getBlockOffset(theObject);
+ 
+ 		m_freeList.clear(theOffset);
+ 
+-- 
+2.30.2
+
