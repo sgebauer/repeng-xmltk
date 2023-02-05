@@ -38,6 +38,10 @@ WORKDIR ${HOME}
 # Since we don't have an exact date or XMLTK version for the original experiment, we use 2002-08-26, which is the
 # oldest PDF build date of the paper we could find.
 RUN cvs -z3 -d:pserver:anonymous@xmltk.cvs.sourceforge.net:/cvsroot/xmltk co -P -D 2002-08-26 xmltk
+# In case the CVS repository breaks, comment out the line above, and enable to following two lines to use our git
+# mirror instead:
+#RUN git clone https://github.com/sgebauer/xmltk.git xmltk
+#RUN cd xmltk && git reset --hard b50c38027b14cbd1f30cc07d2089f4646d1c7241
 
 # Patch and build XMLTK
 ENV XMLTKROOT=${HOME}/xmltk

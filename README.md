@@ -30,6 +30,8 @@ Try re-running the build command in case you get an error message like the follo
 cvs [checkout aborted]: unrecognized auth response from xmltk.cvs.sourceforge.net: cvs pserver: cannot read /cvsroot/xmltk/ CVSROOT/config: Operation not permitted
 ```
 
+In case the CVS repository fails completely, there is also a partial mirror available [on GitHub](https://github.com/sgebauer/xmltk). The Dockerfile contains instructions on how to switch the build over to the mirror.
+
 
 Running the Experiment
 ----------------------
